@@ -1,0 +1,18 @@
+{
+  "name": "iot-mock-project",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "app",
+    "dashboard",
+    "server",
+    "mqtt_broker"
+  ],
+  "scripts": {
+    "install": "yarn workspaces foreach install",
+    "dev": "concurrently \"yarn workspace app dev\" \"yarn workspace dashboard dev\" \"yarn workspace server dev\" \"yarn workspace mqtt_broker dev\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+} 

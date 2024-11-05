@@ -7,8 +7,6 @@
     <h1>MQTT Websocket test</h1>
     <nav>
         <a href="/">Home</a>
-        <a href="/sensors">Sensors</a>
-        <a href="/settings">Settings</a>
     </nav>
     <WsStatus />
 </header>
