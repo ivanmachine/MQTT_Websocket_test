@@ -1,4 +1,5 @@
 import { Server } from "socket.io";
+import mqtt from 'mqtt';
 
 const io = new Server(8080, {
     cors: {
@@ -7,15 +8,30 @@ const io = new Server(8080, {
     }
 });
 
+// Connect to MQTT broker
+const mqttClient = mqtt.connect('mqtt://localhost:1883');
+
+// Subscribe to all sensor topics
+mqttClient.on('connect', () => {
+    console.log('Connected to MQTT broker');
+    mqttClient.subscribe('sensors/#');
+});
+
+// Handle MQTT messages and forward to WebSocket clients
+mqttClient.on('message', (topic, message) => {
+    try {
+        const data = JSON.parse(message.toString());
+        const sensorType = topic.split('/')[1]; // Extract 'temperature', 'humidity', etc.
+        io.emit(sensorType, data); // Forward to all WebSocket clients
+    } catch (error) {
+        console.error('Error parsing MQTT message:', error);
+    }
+});
+
 io.on("connection", (socket) => {
-    console.log("a user connected");
-    // Set up interval to emit random number every second
-    const interval = setInterval(() => {
-        const randomNum: number = Math.floor(Math.random() * 10) + 1;
-        socket.emit("temperature", randomNum);
-    }, 1000);
+    console.log("WebSocket client connected");
 
     socket.on("disconnect", () => {
-        clearInterval(interval);
+        console.log("WebSocket client disconnected");
     });
 });

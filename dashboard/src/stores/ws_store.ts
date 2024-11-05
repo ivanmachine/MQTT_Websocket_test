@@ -2,10 +2,15 @@ import { writable } from 'svelte/store';
 
 interface WSStore {
     status: status_codes;
-    data: number[];
+    data: DataPoint[];
 }
 
 type status_codes = "disconnected" | "loading" | "connected";
+
+interface DataPoint {
+    timestamp: string;
+    value: string;
+}
 
 const initialState: WSStore = {
     status: "disconnected",
