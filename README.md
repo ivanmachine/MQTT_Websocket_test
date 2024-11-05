@@ -3,7 +3,7 @@
 
 A quick IoT prototype built in 2-3 hours using Cursor editor (VSCode with AI) and TypeScript libraries. This project simulates data flow from a sensor to a real-time dashboard via MQTT and WebSocket.
 
-
+![Dashboard Screenshot](images/screenshot_1.png)
 
 ## Project Structure
 
@@ -41,7 +41,7 @@ A quick IoT prototype built in 2-3 hours using Cursor editor (VSCode with AI) an
 4. **Run install script**  
    Run `yarn install` in the root folder.
 
-5. **Run dv escript**  
+5. **Run dev script**  
    Run `yarn dev` in the root folder.
 
 ## License
